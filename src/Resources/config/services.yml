@@ -64,7 +64,7 @@ services:
             - "@sylius.manager.order"
             - "@session.flash_bag"
             - "@translator"
-            - "@templating.engine.twig"
+            - "@twig"
         tags:
             - { name: controller.service_arguments }
 
@@ -72,7 +72,7 @@ services:
         class: BitBag\SyliusWishlistPlugin\Controller\Action\RenderHeaderTemplateAction
         arguments:
             - "@bitbag_sylius_wishlist_plugin.context.wishlist"
-            - "@templating.engine.twig"
+            - "@twig"
         tags:
             - { name: controller.service_arguments }
 

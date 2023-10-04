@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusWishlistPlugin\Controller\Action;
 
 use BitBag\SyliusWishlistPlugin\Context\WishlistContextInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Twig\Environment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,10 +22,10 @@ final class RenderHeaderTemplateAction
     /** @var WishlistContextInterface */
     private $wishlistContext;
 
-    /** @var EngineInterface */
+    /** @var Environment */
     private $templatingEngine;
 
-    public function __construct(WishlistContextInterface $wishlistContext, EngineInterface $templatingEngine)
+    public function __construct(WishlistContextInterface $wishlistContext, Environment $templatingEngine)
     {
         $this->wishlistContext = $wishlistContext;
         $this->templatingEngine = $templatingEngine;

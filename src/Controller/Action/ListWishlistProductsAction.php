@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Twig\Environment;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +49,7 @@ final class ListWishlistProductsAction
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var EngineInterface */
+    /** @var Environment */
     private $templatingEngine;
 
     public function __construct(
@@ -60,7 +60,7 @@ final class ListWishlistProductsAction
         EntityManagerInterface $cartManager,
         FlashBagInterface $flashBag,
         TranslatorInterface $translator,
-        EngineInterface $templatingEngine
+        Environment $templatingEngine
     ) {
         $this->wishlistContext = $wishlistContext;
         $this->cartContext = $cartContext;
