@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ListWishlistProductsAction
 {
@@ -89,20 +89,24 @@ final class ListWishlistProductsAction
 
             $this->flashBag->add('success', $this->translator->trans('bitbag_sylius_wishlist_plugin.ui.added_to_cart'));
 
-            return $this->templatingEngine->renderResponse('@BitBagSyliusWishlistPlugin/wishlist.html.twig', [
-                'wishlist' => $wishlist,
-                'form' => $form->createView(),
-            ]);
+            return new Response(
+                $this->templatingEngine->renderResponse('@BitBagSyliusWishlistPlugin/wishlist.html.twig', [
+                    'wishlist' => $wishlist,
+                    'form' => $form->createView(),
+                ])
+            );
         }
 
         foreach ($form->getErrors() as $error) {
             $this->flashBag->add('error', $error->getMessage());
         }
 
-        return $this->templatingEngine->renderResponse('@BitBagSyliusWishlistPlugin/wishlist.html.twig', [
-            'wishlist' => $wishlist,
-            'form' => $form->createView(),
-        ]);
+        return new Response(
+            $this->templatingEngine->render('@BitBagSyliusWishlistPlugin/wishlist.html.twig', [
+                'wishlist' => $wishlist,
+                'form' => $form->createView(),
+            ])
+        );
     }
 
     private function handleCartItems(FormInterface $form): void
